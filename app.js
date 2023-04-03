@@ -17,6 +17,10 @@ var requestDate = (req, res, next) => {
     req.requestDate = Date.now();
     next();
 };
+app.use((req,res,next) => {
+    req.is_warren_pretty = True;
+    next();
+});
 app.use (requestDate);
 // App Settings
 app.set('view engine', 'ejs');
