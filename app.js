@@ -12,7 +12,12 @@ app.use(
 app.use((req, res, next) => {
     next();
 })
-
+// Add the Reqeust Date to all incoming requests.
+var requestDate = (req, res, next) => {
+    req.requestDate = Date.now();
+    next();
+};
+app.use (requestDate);
 // App Settings
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
