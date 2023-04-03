@@ -3,6 +3,15 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const BlogPost = require('./models/blogpost');
+const morgan = require('morgan');
+// Always use App
+app.use(
+    morgan('dev')
+);
+// Example of pretty useless middleware.
+app.use((req, res, next) => {
+    next();
+})
 // App Settings
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -36,3 +45,4 @@ app.get('/blog', async (req, res) => {
     const blogPost = await BlogPost.findById(req.params.id);
     res.render('blog/entry', { blogPost});
  })
+ 
