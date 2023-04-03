@@ -12,6 +12,7 @@ app.use(
 app.use((req, res, next) => {
     next();
 })
+
 // App Settings
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/blog', {
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection Error"));
 db.once("open", () => {
-console.log("Opened Conection to DB");
+    console.log("Opened Conection to DB");
 })
 
 // Set up default app routes.
@@ -41,8 +42,7 @@ app.get('/blog', async (req, res) => {
     res.render('blog/index', { allPosts });
 
 })
- app.get('/blog/:id', async (req, res) => {
+app.get('/blog/:id', async (req, res) => {
     const blogPost = await BlogPost.findById(req.params.id);
-    res.render('blog/entry', { blogPost});
- })
- 
+    res.render('blog/entry', { blogPost });
+})
