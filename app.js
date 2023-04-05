@@ -17,8 +17,9 @@ var requestDate = (req, res, next) => {
     req.requestDate = Date.now();
     next();
 };
+//  Useless Middleware
 app.use((req,res,next) => {
-    req.is_warren_pretty = True;
+    req.is_warren_pretty = true;
     next();
 });
 app.use (requestDate);
